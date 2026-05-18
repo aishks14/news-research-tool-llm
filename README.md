@@ -506,7 +506,8 @@ User Query (Streamlit Web UI)
      └─────┬──────┘
            ▼
     AI Summary → User
-
+    
+```
 
 **Project Structure**
 
