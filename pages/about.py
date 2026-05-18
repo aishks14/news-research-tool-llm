@@ -211,7 +211,11 @@ files = [
     (".env",                  "API keys — NEVER commit this file to version control"),
     ("requirements.txt",      "Python package dependencies — install with pip"),
     ("README.md",             "Full project documentation and getting-started guide"),
+<<<<<<< HEAD
 ]
+=======
+)
+>>>>>>> 0169455050506155d34542ba676f2b1b42b8988f
 
 for fname, desc in files:
     st.markdown(
