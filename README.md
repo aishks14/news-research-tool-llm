@@ -483,6 +483,8 @@ Completely free — no OpenAI API key required
 Type any company name, market event, or financial topic → get a professionally structured AI summary of the latest news articles in seconds.
 
 **Architecture**
+
+```
 User Query (Streamlit Web UI)
           │
           ▼
@@ -505,7 +507,10 @@ User Query (Streamlit Web UI)
            ▼
     AI Summary → User
 
+
 **Project Structure**
+
+```
 news_research_tool/
 ├── app.py                  ← Main Streamlit app (run this)
 ├── langchain_config.py     ← LLM + NewsAPI pipeline
@@ -519,6 +524,8 @@ news_research_tool/
 └── README.md
 
 **Quick Start**
+
+---
 Step 1 — Clone / Download the project
 bash# If downloaded as zip:
 unzip news_research_tool.zip
@@ -527,9 +534,13 @@ Step 2 — Create a virtual environment (recommended)
 bashpython -m venv venv
 
 # Activate on macOS/Linux:
+
+---
 source venv/bin/activate
 
 # Activate on Windows:
+
+---
 venv\Scripts\activate
 Step 3 — Install dependencies
 bashpip install -r requirements.txt
@@ -559,6 +570,7 @@ Opens automatically at http://localhost:8501
 
 **How to Use**
 
+---
 The web app opens in your browser
 Type a query in the search box, e.g.:
 
@@ -570,6 +582,7 @@ Type a query in the search box, e.g.:
 
 **Adjust settings in the left sidebar:**
 
+---
 Max Articles — how many news articles to fetch (3–20)
 Groq Model — choose between LLaMA 3 8B, 70B, or Mixtral
 Show Source Articles — toggle article cards on/off
@@ -579,6 +592,8 @@ Click "Get AI Summary"
 Within a few seconds you get:
 
 **Quick stats (articles fetched, sources, model)**
+
+---
 Full AI-generated research summary
 Download button (.txt export)
 Individual source article cards
@@ -587,15 +602,23 @@ Individual source article cards
 
 
 **Available Models (all free on Groq)**
+
+---
 ModelSpeedBest Forllama3-8b-8192⚡ FastestGeneral summarisationllama3-70b-8192🔥 PowerfulComplex analysismixtral-8x7b-32768📄 Large contextMany articles
 
 **Dependencies**
+
+---
 PackageVersionPurposelangchain≥0.2.0LLM orchestration frameworklangchain-groq≥0.1.0Groq LLM connectorlangchain-community≥0.2.0Community integrationsnewsapi-python≥0.2.7NewsAPI clientstreamlit≥1.35.0Web application frameworkpython-dotenv≥1.0.0Load .env API keysrequests≥2.31.0HTTP requests
 
 **What Replaced OpenAI**
+
+---
 ComponentOriginal (OpenAI)This Project (Groq)LLM ModelGPT-3.5 / GPT-4LLaMA 3 (Meta)API ProviderOpenAIGroqLangChain Classlangchain.OpenAI()ChatGroq()Cost~$0.002/1K tokensFreeSpeedModerateVery fast (LPU)Context window4K–128K tokens8K–32K tokens
 
 **Common Issues & Fixes**
+
+---
 EnvironmentError: GROQ_API_KEY not found
 → Make sure your .env file exists in the project root and contains the key.
 NewsAPI error: rateLimited
@@ -607,12 +630,16 @@ streamlit: command not found
 
 **Security Notes**
 
+---
+
 Never commit your .env file to Git — it contains secret API keys
 The .gitignore file already excludes .env from version control
 Rotate your API keys if you accidentally expose them
 
 
 **Optional Enhancements**
+
+---
 FeatureHowSave history to databaseAdd sqlite3 or tinydbExport as PDFAdd fpdf2 or reportlabAdd loginUse streamlit-authenticatorSchedule daily digestsUse APSchedulerDeploy onlinePush to Streamlit Community Cloud — free
 
 License
