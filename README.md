@@ -13,7 +13,7 @@ An end-to-end LLM application that:
 
 ---
 
-## **File Structure & Descriptions**
+## **File Structure & Descriptions**      
 
 ### **Root Files**
 
@@ -506,7 +506,7 @@ User Query (Streamlit Web UI)
      └─────┬──────┘
            ▼
     AI Summary → User
-    
+
 ```
 
 **Project Structure**
@@ -523,6 +523,8 @@ news_research_tool/
 ├── .gitignore
 ├── requirements.txt
 └── README.md
+
+```
 
 **Quick Start**
 
