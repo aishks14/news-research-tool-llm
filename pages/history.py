@@ -83,7 +83,7 @@ else:
     # ── Clear all button ──────────────────────────────────────
     if st.button("🗑️  Clear All History", type="secondary"):
         st.session_state["search_history"] = []
-        st.success("✅ History cleared.")
+        st.success("History cleared.")
         st.rerun()
 
     st.markdown("---")

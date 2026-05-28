@@ -1,219 +1,235 @@
 # =============================================================
 # File: pages/about.py
 # =============================================================
-# Purpose:
-#   The ABOUT PAGE of the multi-page Streamlit application.
-#   Explains the project architecture, tech stack, and
-#   provides setup instructions for new users.
-#
-# Author: News Research Tool Project
+# Modern About Page for AI News Research Assistant
 # =============================================================
 
 import streamlit as st
 
 st.set_page_config(
-    page_title="About — News Research Tool",
-    page_icon="ℹ️",
+    page_title="About — AI News Research Assistant",
+    page_icon="📰",
     layout="wide",
 )
 
 st.markdown("""
 <style>
-    .info-card {
-        background: #1e293b;
-        border: 1px solid #334155;
-        border-radius: 10px;
-        padding: 1.2rem 1.5rem;
-        margin-bottom: 1rem;
-    }
-    .info-card h3 { color: #38bdf8; margin-top: 0; }
-    .info-card p, .info-card li { color: #cbd5e1; font-size: 0.92rem; }
-    .phase-badge {
-        display: inline-block;
-        background: #0c4a6e;
-        color: #38bdf8;
-        border-radius: 20px;
-        padding: 3px 12px;
-        font-size: 0.78rem;
-        font-weight: 700;
-        margin-bottom: 0.5rem;
-    }
-    #MainMenu { visibility: hidden; }
-    header    { visibility: hidden; }
+
+.main-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #38bdf8;
+    margin-bottom: 0.3rem;
+}
+
+.sub-text {
+    color: #cbd5e1;
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
+}
+
+.feature-card {
+    background: #111827;
+    border: 1px solid #1f2937;
+    border-radius: 14px;
+    padding: 1.3rem;
+    margin-bottom: 1rem;
+    transition: 0.3s ease-in-out;
+}
+
+.feature-card:hover {
+    border-color: #38bdf8;
+    transform: translateY(-3px);
+}
+
+.feature-title {
+    color: #38bdf8;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.feature-text {
+    color: #cbd5e1;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.section-heading {
+    color: #38bdf8;
+    font-size: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.highlight-box {
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    border: 1px solid #334155;
+    border-radius: 14px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.highlight-box p {
+    color: #e2e8f0;
+    line-height: 1.7;
+}
+
+.footer-text {
+    text-align: center;
+    color: #94a3b8;
+    margin-top: 3rem;
+    font-size: 0.9rem;
+}
+
+#MainMenu {visibility:hidden;}
+header {visibility:hidden;}
+
 </style>
 """, unsafe_allow_html=True)
 
-# =============================================================
-# Header
-# =============================================================
+st.markdown('<div class="main-title">📰 AI News Research Assistant</div>', unsafe_allow_html=True)
 
-st.title("ℹ️ About This Project")
-st.markdown(
-    "An end-to-end AI news research assistant for equity analysts, "
-    "built with LangChain, Groq (LLaMA 3), NewsAPI, and Streamlit."
-)
-st.markdown("---")
+st.markdown("""
+<div class="sub-text">
+An intelligent AI-powered platform that transforms real-time news into
+clear, concise, and actionable insights using Large Language Models (LLMs).
+</div>
+""", unsafe_allow_html=True)
 
-# =============================================================
-# Architecture Diagram (text-based)
-# =============================================================
+st.markdown('<div class="section-heading">🚀 What This Platform Does</div>', unsafe_allow_html=True)
 
-st.markdown("### 🏗️ System Architecture")
-st.code("""
-User Query (Streamlit)
-        │
-        ▼
-┌───────────────────┐
-│   app.py          │  ← Front-end: Streamlit web interface
-│   (UI layer)      │
-└────────┬──────────┘
-         │ calls
-         ▼
-┌───────────────────┐
-│ langchain_config  │  ← Intelligence layer: LangChain pipeline
-│   (logic layer)   │
-└──┬─────────────┬──┘
-   │             │
-   ▼             ▼
-┌──────────┐  ┌──────────────────┐
-│ NewsAPI  │  │   Groq LLM       │
-│ Articles │  │   (LLaMA 3)      │
-└──────────┘  └──────────────────┘
-   │                │
-   └────────┬───────┘
-            ▼
-      AI Summary → Streamlit UI → User
-""", language="")
+st.markdown("""
+<div class="highlight-box">
+<p>
+The AI News Research Assistant helps users quickly understand large volumes
+of news content by leveraging modern LLM technology and real-time news aggregation.
+Instead of manually reading multiple articles, users can enter a topic and receive
+AI-generated summaries, insights, trends, and key highlights within seconds.
+</p>
+</div>
+""", unsafe_allow_html=True)
 
-st.markdown("---")
-
-# =============================================================
-# Tech Stack
-# =============================================================
-
-st.markdown("### 🛠️ Tech Stack")
+st.markdown('<div class="section-heading">✨ Key Features</div>', unsafe_allow_html=True)
 
 col1, col2 = st.columns(2)
 
 with col1:
+
     st.markdown("""
-    <div class="info-card">
-        <h3>🔗 LangChain</h3>
-        <p>
-        The orchestration framework that connects the LLM to the
-        prompt templates and data pipeline. Provides the
-        <code>LLMChain</code>, <code>PromptTemplate</code>,
-        and model abstractions used throughout the project.
-        </p>
+    <div class="feature-card">
+        <div class="feature-title">🧠 AI-Powered Summarization</div>
+        <div class="feature-text">
+        Generates intelligent summaries from multiple news articles
+        using advanced Large Language Models.
+        </div>
     </div>
     """, unsafe_allow_html=True)
 
     st.markdown("""
-    <div class="info-card">
-        <h3>🗞️ NewsAPI</h3>
-        <p>
-        Real-time news aggregation API covering 80,000+ news sources
-        worldwide. Returns article titles, descriptions, URLs, and
-        publication dates filtered by query, language, and relevance.
-        Free tier: 100 requests/day.
-        </p>
+    <div class="feature-card">
+        <div class="feature-title">📈 Trend Identification</div>
+        <div class="feature-text">
+        Detects emerging trends, recurring themes, and important
+        market developments from real-time news data.
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown("""
+    <div class="feature-card">
+        <div class="feature-title">⚡ Real-Time News Insights</div>
+        <div class="feature-text">
+        Fetches the latest articles instantly and converts them
+        into structured business intelligence.
+        </div>
     </div>
     """, unsafe_allow_html=True)
 
 with col2:
+
     st.markdown("""
-    <div class="info-card">
-        <h3>⚡ Groq + LLaMA 3</h3>
-        <p>
-        Groq provides a free API to run Meta's LLaMA 3 models on
-        custom LPU (Language Processing Unit) hardware — delivering
-        speeds 10-100× faster than standard GPU inference.
-        <br><br>
-        <strong>Replaces OpenAI</strong> in this project. Identical
-        LangChain interface, zero cost, no rate-limit concerns for
-        typical usage.
-        </p>
+    <div class="feature-card">
+        <div class="feature-title">🌍 Multi-Source News Coverage</div>
+        <div class="feature-text">
+        Aggregates articles from multiple trusted news platforms
+        and provides a unified AI-driven summary.
+        </div>
     </div>
     """, unsafe_allow_html=True)
 
     st.markdown("""
-    <div class="info-card">
-        <h3>🌐 Streamlit</h3>
-        <p>
-        Python-native web framework that converts Python scripts into
-        interactive web apps. No HTML/CSS/JavaScript required.
-        Handles session state, UI components, file downloads,
-        and multi-page navigation automatically.
-        </p>
+    <div class="feature-card">
+        <div class="feature-title">📊 Market & Sentiment Analysis</div>
+        <div class="feature-text">
+        Helps users understand market sentiment, opportunities,
+        risks, and business impact from ongoing news events.
+        </div>
     </div>
     """, unsafe_allow_html=True)
 
-st.markdown("---")
+    st.markdown("""
+    <div class="feature-card">
+        <div class="feature-title">💡 Interactive User Experience</div>
+        <div class="feature-text">
+        Provides a clean and intuitive interface for exploring,
+        analyzing, and understanding news topics efficiently.
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
-# =============================================================
-# Setup Instructions
-# =============================================================
-
-st.markdown("### 🚀 Setup Instructions")
+st.markdown('<div class="section-heading">🎯 Who Can Use This?</div>', unsafe_allow_html=True)
 
 st.markdown("""
-<div class="info-card">
-    <span class="phase-badge">PHASE 1</span>
-    <h3>Install Dependencies</h3>
-    <pre style="background:#0f172a;padding:0.8rem;border-radius:6px;color:#38bdf8;">
-pip install -r requirements.txt</pre>
-</div>
+<div class="highlight-box">
+<p>
 
-<div class="info-card">
-    <span class="phase-badge">PHASE 2</span>
-    <h3>Get Your API Keys</h3>
-    <ul>
-        <li><strong>Groq API Key</strong> → 
-            <a href="https://console.groq.com" target="_blank" style="color:#38bdf8;">
-            console.groq.com</a> — Free, no credit card required</li>
-        <li><strong>NewsAPI Key</strong> → 
-            <a href="https://newsapi.org/register" target="_blank" style="color:#38bdf8;">
-            newsapi.org/register</a> — Free tier: 100 req/day</li>
-    </ul>
-</div>
+✅ Financial & Equity Research Analysts<br><br>
+✅ Data Analysts & Business Intelligence Teams<br><br>
+✅ Students & Researchers<br><br>
+✅ Market Research Professionals<br><br>
+✅ Business Strategy Teams<br><br>
+✅ Anyone who wants faster understanding of current events and news trends
 
-<div class="info-card">
-    <span class="phase-badge">PHASE 3</span>
-    <h3>Configure .env File</h3>
-    <pre style="background:#0f172a;padding:0.8rem;border-radius:6px;color:#38bdf8;">
-GROQ_API_KEY=your_groq_key_here
-NEWS_API_KEY=your_newsapi_key_here</pre>
-</div>
-
-<div class="info-card">
-    <span class="phase-badge">PHASE 4</span>
-    <h3>Run the App</h3>
-    <pre style="background:#0f172a;padding:0.8rem;border-radius:6px;color:#38bdf8;">
-streamlit run app.py</pre>
-    <p>Opens at <strong>http://localhost:8501</strong></p>
+</p>
 </div>
 """, unsafe_allow_html=True)
 
-st.markdown("---")
+st.markdown('<div class="section-heading">🛠️ Powered By</div>', unsafe_allow_html=True)
 
-# =============================================================
-# Project Files Summary
-# =============================================================
+st.markdown("""
+<div class="highlight-box">
+<p>
 
-st.markdown("### 📁 Project File Summary")
+• Streamlit for interactive web application development<br><br>
+• LangChain for LLM orchestration and AI workflow management<br><br>
+• Groq LLM APIs for ultra-fast inference and intelligent summarization<br><br>
+• NewsAPI for real-time global news aggregation
 
-files = [
-    ("app.py",                "Main Streamlit UI — query input, summary display, article cards"),
-    ("langchain_config.py",   "Core logic — LLM init, NewsAPI calls, LangChain pipeline"),
-    ("utils.py",              "Utility functions — date formatting, validation, download builder"),
-    ("pages/history.py",      "Streamlit page — past query history with download option"),
-    ("pages/about.py",        "Streamlit page — project info, architecture, setup guide"),
-    (".env",                  "API keys — NEVER commit this file to version control"),
-    ("requirements.txt",      "Python package dependencies — install with pip"),
-    ("README.md",             "Full project documentation and getting-started guide"),
-]
+</p>
+</div>
+""", unsafe_allow_html=True)
 
-for fname, desc in files:
-    st.markdown(
-        f"- **`{fname}`** — {desc}"
-    )
+st.markdown('<div class="section-heading">🔮 Future Enhancements</div>', unsafe_allow_html=True)
+
+st.markdown("""
+<div class="highlight-box">
+<p>
+
+• Personalized news recommendations<br><br>
+• Historical trend analysis dashboards<br><br>
+• AI-generated reports & PDF exports<br><br>
+• Voice-enabled AI news assistant<br><br>
+• Multi-language summarization support<br><br>
+• Advanced sentiment visualization & analytics
+
+</p>
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown("""
+<div class="footer-text">
+Built with AI, LLMs, and modern data intelligence technologies 🚀
+</div>
+""", unsafe_allow_html=True)

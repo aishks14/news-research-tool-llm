@@ -108,7 +108,7 @@ st.markdown("""
     .section-header {
         font-size: 1.1rem;
         font-weight: 700;
-        color: #f1f5f9;
+        color: #000;
         border-bottom: 2px solid #334155;
         padding-bottom: 0.4rem;
         margin: 1.5rem 0 0.8rem;
@@ -165,17 +165,20 @@ with st.sidebar:
 
     # Model selector (all free on Groq)
     model_choice = st.selectbox(
-        "🤖 Groq Model",
+        "Groq Model",
         options=[
-            "llama3-8b-8192",
-            "llama3-70b-8192",
-            "mixtral-8x7b-32768",
+            "llama-3.3-70b-versatile",
+            "llama-3.3-8b-versatile",
+            "llama-3.1-8b-instant",
+            "qwen/qwen3-32b"
         ],
         index=0,
         help=(
-            "llama3-8b → Fast & efficient\n"
-            "llama3-70b → More powerful\n"
-            "mixtral → Large context window"
+            "Choose the Groq model for summarisation. All are free to use with your API key, but differ in speed and quality:\n"
+            "- llama-3.3-70b-versatile → Best quality, slower\n"
+            "- llama-3.3-8b-versatile  → Good quality, faster\n"
+            "- llama-3.1-8b-instant   → Fastest, less detailed\n"
+            "- qwen/qwen3-32b        → Strong on reasoning tasks\n"
         )
     )
 
@@ -191,7 +194,7 @@ with st.sidebar:
     st.markdown("""
     This tool uses:
     - 🗞️ **NewsAPI** — real-time news
-    - 🦙 **Groq + LLaMA 3** — AI summarisation
+    - 🦙 **Groq + LLaMA 3 + Qwen 3** — AI summarisation
     - 🔗 **LangChain** — LLM orchestration
     - 🌐 **Streamlit** — web interface
     """)
@@ -214,11 +217,11 @@ with st.sidebar:
 
 st.markdown("""
 <div style="text-align:center; padding: 1.5rem 0 0.5rem;">
-    <h1 style="font-size:2.4rem; font-weight:800; color:#f1f5f9; margin:0;">
-        📰 Equity News Research Tool
+    <h1 style="font-size:4.2rem; font-weight:1000; color:#000; margin:0;">
+        AI News Intelligence Hub
     </h1>
     <p style="color:#64748b; font-size:1rem; margin-top:0.4rem;">
-        Powered by Groq · LLaMA 3 · LangChain · NewsAPI
+        Powered by Groq · LLaMA 3 · qwen3 · LangChain · NewsAPI
     </p>
 </div>
 """, unsafe_allow_html=True)
@@ -229,6 +232,7 @@ with cols_badges[1]:
     st.markdown("""
     <div style="text-align:center; margin-bottom:1rem;">
         <span class="badge">🦙 LLaMA 3</span>
+        <span class="badge">🧠 qwen3</span>
         <span class="badge">⚡ Groq</span>
         <span class="badge">🔗 LangChain</span>
         <span class="badge">🗞️ NewsAPI</span>
@@ -287,12 +291,12 @@ with col_btn:
 if not search_clicked and not example_query:
     st.markdown("""
     <div class="info-box" style="margin-top:1.5rem;">
-        <strong>ℹ️ How it works:</strong><br><br>
-        1️⃣  Enter a topic, company name, or market event above<br>
-        2️⃣  Click <strong>Get AI Summary</strong><br>
-        3️⃣  The tool fetches the latest news articles from NewsAPI<br>
-        4️⃣  LangChain sends them to the Groq LLM (LLaMA 3)<br>
-        5️⃣  You receive a structured, analyst-ready summary in seconds
+        <strong>How it works:</strong><br><br>
+        1. Enter a topic, company name, or market event above<br>
+        2. Click <strong>Get AI Summary</strong><br>
+        3. The tool fetches the latest news articles from NewsAPI<br>
+        4. LangChain sends them to the Groq LLM<br>
+        5. You receive a structured, analyst-ready summary in seconds
     </div>
     """, unsafe_allow_html=True)
 
@@ -304,10 +308,10 @@ if search_clicked or example_query:
     query = query_input.strip() if query_input.strip() else (example_query or "")
 
     if not query:
-        st.warning("⚠️  Please enter a query before clicking Search.")
+        st.warning("Please enter a query before clicking Search.")
     else:
         # ── Step 1: Fetch news articles ────────────────────────
-        with st.spinner("📰 Fetching latest news articles..."):
+        with st.spinner("Fetching latest news articles..."):
             try:
                 summaries_text, articles = get_summary(
                     query=query,
@@ -315,7 +319,7 @@ if search_clicked or example_query:
                 )
                 news_fetched = True
             except Exception as e:
-                st.error(f"❌ Failed to fetch news: {str(e)}")
+                st.error(f"Failed to fetch news: {str(e)}")
                 news_fetched = False
 
         if news_fetched:
@@ -328,7 +332,7 @@ if search_clicked or example_query:
             sources = list({a["source"]["name"] for a in usable})
 
             st.markdown("---")
-            st.markdown('<div class="section-header">📊 Research Overview</div>',
+            st.markdown('<div class="section-header">Research Overview</div>',
                         unsafe_allow_html=True)
             m1, m2, m3, m4 = st.columns(4)
             with m1:
@@ -358,10 +362,10 @@ if search_clicked or example_query:
 
             # ── Step 3: Run LLM summarisation ─────────────────
             st.markdown("---")
-            st.markdown('<div class="section-header">🤖 AI-Generated Research Summary</div>',
+            st.markdown('<div class="section-header"> AI-Generated Research Summary</div>',
                         unsafe_allow_html=True)
 
-            with st.spinner("🦙 LLaMA 3 is analysing the articles..."):
+            with st.spinner("Model is analysing the articles..."):
                 try:
                     t_start = time.time()
 
@@ -378,7 +382,7 @@ if search_clicked or example_query:
                     llm_success = True
 
                 except Exception as e:
-                    st.error(f"❌ LLM error: {str(e)}")
+                    st.error(f"LLM error: {str(e)}")
                     llm_success = False
 
             if llm_success:
@@ -390,14 +394,14 @@ if search_clicked or example_query:
 
                 # Time and model info
                 st.caption(
-                    f"⏱️ Generated in {t_elapsed}s  ·  "
+                    f"Generated in {t_elapsed}s  ·  "
                     f"Model: {model_choice}  ·  "
                     f"Query: '{query}'"
                 )
 
                 # Download button
                 st.download_button(
-                    label="⬇️  Download Summary as .txt",
+                    label="Download Summary as .txt",
                     data=f"Query: {query}\n\nModel: {model_choice}\n\n"
                          f"{'='*60}\n\n{result}",
                     file_name=f"summary_{query[:30].replace(' ','_')}.txt",
@@ -442,8 +446,7 @@ if search_clicked or example_query:
 st.markdown("---")
 st.markdown("""
 <div style="text-align:center; color:#000000; font-size:0.8rem; padding:0.5rem 0 1rem;">
-    📰 Equity News Research Tool &nbsp;·&nbsp;
+    AI News Intelligence Hub &nbsp;·&nbsp;
     Built with LangChain + Groq + NewsAPI + Streamlit &nbsp;·&nbsp;
-    OpenAI-free · Fully local-compatible
 </div>
 """, unsafe_allow_html=True)

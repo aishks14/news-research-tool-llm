@@ -53,19 +53,19 @@ NEWS_API_KEY  = os.getenv("NEWS_API_KEY")
 # Validate that both keys are present before anything else runs
 if not GROQ_API_KEY:
     raise EnvironmentError(
-        "❌  GROQ_API_KEY not found in .env file.\n"
+        "      GROQ_API_KEY not found in .env file.\n"
         "    → Get a free key at https://console.groq.com\n"
         "    → Add it to your .env file as: GROQ_API_KEY=your_key_here"
     )
 
 if not NEWS_API_KEY:
     raise EnvironmentError(
-        "❌  NEWS_API_KEY not found in .env file.\n"
+        "   NEWS_API_KEY not found in .env file.\n"
         "    → Get a free key at https://newsapi.org/register\n"
         "    → Add it to your .env file as: NEWS_API_KEY=your_key_here"
     )
 
-logger.info("✅ Environment variables loaded successfully")
+logger.info("Environment variables loaded successfully")
 
 # =============================================================
 # SECTION 2 — Groq LLM Initialisation (OpenAI Replacement)
@@ -79,15 +79,15 @@ logger.info("✅ Environment variables loaded successfully")
 #   - "llama3-70b-8192"    → More powerful, slightly slower
 #   - "mixtral-8x7b-32768" → Large context window (32K tokens)
 # =============================================================
-
+model = "llama-3.3-70b-versatile"
 llm = ChatGroq(
     groq_api_key=GROQ_API_KEY,
-    model_name="llama3-8b-8192",
+    model_name= model,
     temperature=0.3,       # Lower = more factual, less creative
     max_tokens=1024,       # Maximum tokens in the response
 )
 
-logger.info("✅ Groq LLM (LLaMA 3 8B) initialised")
+logger.info(f"Groq LLM ({model}) initialised")
 
 # =============================================================
 # SECTION 3 — Prompt Template
